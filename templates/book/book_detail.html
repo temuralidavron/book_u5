@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">description</th>
+      <th scope="col">price</th>
+      <th scope="col">action</th>
+      <th scope="col">delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>{{ book.title }}</td>
+      <td>{{ book.description }}</td>
+      <td>{{ book.price }}</td>
+      <td><a href="{% url 'book-update' book.pk %}">update</a></td>
+      {% if perms.book.delete_book %}
+      <td><a href="{% url 'book-delete' book.pk %}">delete</a></td>
+      {% endif %}
+      {% if book.file %}
+      <td><a href="{{ book.file.url }}">download</a></td>
+      {% else %}
+      <td>pdf yoq</td>
+      {% endif %}
+
+    </tr>
+
+  </tbody>
+</table>
+
+
+{% endblock%}
